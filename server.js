@@ -34,6 +34,10 @@ const swaggerOptions = {
         url: `http://localhost:${PORT}`, // Base path for your API routes
         description: 'Development Server',
       },
+      {
+        url: 'https://deployed-api-advanceddb-group-6.onrender.com',
+        description: 'Render Deployment (Production)',
+      },
       // You can add your OCI deployed server URL here later:
       // {
       //   url: 'https://your-oci-app-url.com/api',
@@ -42,41 +46,41 @@ const swaggerOptions = {
     ],
     // The components section where your schemas are defined
     components: {
-        schemas: {
-            // This 'SalesData' schema definition MUST match the one you have in your sales.routes.js
-            // It's good practice to have this here as the central definition for Swagger.
-            SalesData: {
-                type: 'object',
-                required: [
-                    'invoiceNo',
-                    'stockCode',
-                    'quantity',
-                    'invoiceDate',
-                    'unitPrice',
-                    'country'
-                ],
-                properties: {
-                    invoiceNo: { type: 'string', maxLength: 20, description: 'Invoice number' },
-                    stockCode: { type: 'string', maxLength: 20, description: 'Product stock code' },
-                    description: { type: 'string', maxLength: 255, description: 'Product description' },
-                    quantity: { type: 'integer', description: 'Quantity sold' },
-                    invoiceDate: { type: 'string', format: 'date-time', description: 'Date and time of invoice' },
-                    unitPrice: { type: 'number', format: 'float', description: 'Unit price of the product' }, // Use 'float' or 'double' for format if applicable
-                    customerId: { type: 'integer', nullable: true, description: 'Customer ID (nullable)' },
-                    country: { type: 'string', maxLength: 100, description: 'Country of sale' }
-                },
-                example: { // An example object that conforms to the schema
-                    invoiceNo: "536365",
-                    stockCode: "85123A",
-                    description: "WHITE HANGING HEART T-LIGHT HOLDER",
-                    quantity: 6,
-                    invoiceDate: "2010-12-01T08:26:00.000Z",
-                    unitPrice: 2.55,
-                    customerId: 17850,
-                    country: "United Kingdom"
-                }
-            }
+      schemas: {
+        // This 'SalesData' schema definition MUST match the one you have in your sales.routes.js
+        // It's good practice to have this here as the central definition for Swagger.
+        SalesData: {
+          type: 'object',
+          required: [
+            'invoiceNo',
+            'stockCode',
+            'quantity',
+            'invoiceDate',
+            'unitPrice',
+            'country'
+          ],
+          properties: {
+            invoiceNo: { type: 'string', maxLength: 20, description: 'Invoice number' },
+            stockCode: { type: 'string', maxLength: 20, description: 'Product stock code' },
+            description: { type: 'string', maxLength: 255, description: 'Product description' },
+            quantity: { type: 'integer', description: 'Quantity sold' },
+            invoiceDate: { type: 'string', format: 'date-time', description: 'Date and time of invoice' },
+            unitPrice: { type: 'number', format: 'float', description: 'Unit price of the product' }, // Use 'float' or 'double' for format if applicable
+            customerId: { type: 'integer', nullable: true, description: 'Customer ID (nullable)' },
+            country: { type: 'string', maxLength: 100, description: 'Country of sale' }
+          },
+          example: { // An example object that conforms to the schema
+            invoiceNo: "536365",
+            stockCode: "85123A",
+            description: "WHITE HANGING HEART T-LIGHT HOLDER",
+            quantity: 6,
+            invoiceDate: "2010-12-01T08:26:00.000Z",
+            unitPrice: 2.55,
+            customerId: 17850,
+            country: "United Kingdom"
+          }
         }
+      }
     }
   },
   // Point to the files containing your JSDoc Swagger comments
@@ -85,8 +89,8 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
-app.get("/api/health", (req,res) =>{
-  res.status(200).json({message : ""})
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ message: "Your API is Active" })
 })
 // Serve the Swagger UI at a specific endpoint
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -98,7 +102,8 @@ app.use("/api/sales", salesRouter)
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}/`)
-    console.log(`Swagger UI available at http://localhost:${PORT}/api-docs`) // Let the user know where to find it
+  console.log(`Server running on http://localhost:${PORT}/`)
+  console.log(`Swagger UI available at http://localhost:${PORT}/api-docs`) // Let the user know where to find it
+  console.log(`Production Swagger UI available at https://deployed-api-advanceddb-group-6.onrender.com/api-docs`) // Let the user know where to find it
 })
 
