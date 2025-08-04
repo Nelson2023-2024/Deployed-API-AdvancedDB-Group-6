@@ -85,6 +85,9 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
+app.get("/api/health", (req,res) =>{
+  res.status(200).json({message : ""})
+})
 // Serve the Swagger UI at a specific endpoint
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
