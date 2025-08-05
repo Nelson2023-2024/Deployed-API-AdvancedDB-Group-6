@@ -12,6 +12,7 @@
   "type": "module",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
+    "cors": "^2.8.5",
     "cron": "^4.3.3",
     "dotenv": "^17.2.0",
     "drizzle-orm": "^0.44.3",

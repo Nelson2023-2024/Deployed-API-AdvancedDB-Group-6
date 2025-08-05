@@ -1,5 +1,6 @@
 import express from "express"
 import { configDotenv } from "dotenv"
+import cors from 'cors';
 import { salesRouter } from "./routes/sales.routes.js" // Corrected path based on your previous input
 
 // Import Swagger packages
@@ -12,6 +13,7 @@ const app = express()
 const PORT = process.env.PORT || 3000 // Provide a default port if not set in .env
 
 app.use(express.json())
+app.use(cors());
 
 // --- Swagger Setup Start ---
 
