@@ -2,7 +2,7 @@
 
 import { pgTable, varchar, integer, timestamp, numeric } from 'drizzle-orm/pg-core';
 
-export const salesData = pgTable('sales_data', {
+export const salesData = pgTable('online_retail_data', {
     invoiceNo: varchar('invoice_no', { length: 20 }).notNull(),
     stockCode: varchar('stock_code', { length: 20 }).notNull(),
     description: varchar('description', { length: 255 }),
